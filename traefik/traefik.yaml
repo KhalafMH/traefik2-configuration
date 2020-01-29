@@ -1,0 +1,46 @@
+providers:
+  docker: {}
+
+api:
+  dashboard: true
+
+entryPoints:
+  web:
+    address: ":80"
+  websecure:
+    address: ":443"
+
+# Those were not picked up by Traefik for an unknown reason
+#http:
+#  middlewares:
+#    httpRedirect:
+#      redirectScheme:
+#        scheme: https
+#  routers:
+#    httpRedirectRouter:
+#      rule: "Host(`*`)"
+#      entrypoints:
+#        - web
+#      middlewares:
+#        - httpRedirect@file
+
+certificatesResolvers:
+  le:
+    acme:
+      email: "mahdi@mahdialkhalaf.com"
+      storage: acme.json
+      httpChallenge:
+        # used during the challenge
+        entryPoint: web
+
+metrics:
+  prometheus: {}
+
+tracing:
+  jaeger: {}
+
+accessLog:
+  filePath: "/var/log/traefik/access.log"
+
+log:
+  filePath: "/var/log/traefik/traefik.log"
