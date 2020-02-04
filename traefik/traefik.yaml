@@ -29,8 +29,9 @@ certificatesResolvers:
     acme:
       email: "mahdi@mahdialkhalaf.com"
       storage: acme.json
+      # uncomment to use the staging server
+      # caServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
       httpChallenge:
-        # used during the challenge
         entryPoint: web
 
 metrics:
